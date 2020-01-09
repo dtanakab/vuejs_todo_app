@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Todoリスト</title>
+    <link rel="stylesheet" type="text/css" href="main.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>Todoリスト</h1>
+      <input v-model="todo" placeholder="edit me" />
+      <button class="add" v-on:click="add_todo()">リストに追加</button>
+      <br /><br />
+      <div class="tabs">
+        <label v-for="tab in tabs">
+          <input type="radio" v-model="pickup" v-bind:value="tab" />{{ tab }}
+        </label>
+      </div>
+      <hr />
+      <ul>
+        <div v-for="(todo, index) in todo_list">
+          <li v-if="validation(todo)">
+            <span v-bind:class="todo.status">{{ todo.text }}</span>
+            <div class="buttons">
+              <button
+                v-if="todo.status == 'Done'"
+                v-on:click="update_status(todo)"
+              >
+                未完に戻す
+              </button>
+              <button class="complete" v-else v-on:click="update_status(todo)">
+                Done！
+              </button>
+              <button class="delete" v-on:click="delete_todo(index)">
+                削除
+              </button>
+            </div>
+          </li>
+        </div>
+      </ul>
+      <strong v-if=" todo_counts > 0 ">
+        {{ todo_counts }}つ未完のTodoがあります
+      </strong>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
