@@ -26,8 +26,7 @@
             <div class="buttons">
               <button
                 v-if="todo.status == 'Done'"
-                v-on:click="update_status(todo)"
-              >
+                v-on:click="update_status(todo)">
                 未完に戻す
               </button>
               <button class="complete" v-else v-on:click="update_status(todo)">
